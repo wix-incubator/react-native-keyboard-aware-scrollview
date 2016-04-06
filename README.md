@@ -35,6 +35,8 @@ Example:
 </KeyboardAwareScrollView>
 ```
 
-## Full Example
+## Example Project
 
-Check out the full example project here.
+Check out the full example project [here](https://github.com/wix/react-native-keyboard-aware-scrollview/tree/master/example).
+
+In the example folder, perform `npm install` and then run it from the Xcode project.
