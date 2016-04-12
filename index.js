@@ -1,3 +1,4 @@
 import KeyboardAwareScrollView from './src/KeyboardAwareScrollView';
+import KeyboardAwareListView from './src/KeyboardAwareListView';
 
-export default KeyboardAwareScrollView;
+export {KeyboardAwareScrollView, KeyboardAwareListView};
