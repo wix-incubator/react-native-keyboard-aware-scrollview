@@ -41,7 +41,7 @@ export default class KeyboardAwareBase extends React.Component {
       textInputRefs.forEach((textInputRef) => {
         if (textInputRef.isFocused()) {
           this._keyboardAwareView.getScrollResponder().scrollResponderScrollNativeHandleToKeyboard(
-            React.findNodeHandle(textInputRef), 50, true);
+            React.findNodeHandle(textInputRef), 50 + (this.props.scrollOffset || 0), true);
         }
       });
     }
