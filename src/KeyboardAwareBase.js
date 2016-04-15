@@ -1,11 +1,14 @@
 import React, {
-  DeviceEventEmitter
+  DeviceEventEmitter,
+  NativeModules
 } from 'react-native';
+
+var ScrollViewManager = NativeModules.ScrollViewManager;
 
 export default class KeyboardAwareBase extends React.Component {
   constructor(props) {
     super(props);
-    this._bind('_onKeyboardWillShow', '_onKeyboardWillHide', '_addKeyboardEventListeners', '_removeKeyboardListeners', '_scrollToFocusedTextInput');
+    this._bind('_onKeyboardWillShow', '_onKeyboardWillHide', '_addKeyboardEventListeners', '_removeKeyboardListeners', '_scrollToFocusedTextInput', '_onKeyboardAwareViewLayout', 'scrollToBottom');
     this.state = {keyboardHeight: 0};
   }
   
@@ -28,7 +31,14 @@ export default class KeyboardAwareBase extends React.Component {
   
   componentWillMount() {
     this._addKeyboardEventListeners();
-    //ReactNativeEventEmitter.putListener('123', 'focus', () => {console.error('ReactNativeEventEmitter')});
+
+  }
+
+  _onKeyboardAwareViewLayout(layout) {
+    this._keyboardAwareView.layout = layout;
+    ScrollViewManager.getContentSize(React.findNodeHandle(this._keyboardAwareView), (res)=> {
+      this._keyboardAwareView.contentSize = res;
+    })
   }
 
   componentWillUnmount() {
@@ -63,5 +73,10 @@ export default class KeyboardAwareBase extends React.Component {
     if(this._keyboardAwareView) {
       this._keyboardAwareView.scrollTo({x: 0, y: 0, animated: true});
     }
+  }
+
+  scrollToBottom() {
+    const bottomYOffset = this._keyboardAwareView.contentSize.height - this._keyboardAwareView.layout.height + this._keyboardAwareView.props.contentInset.bottom;
+    this._keyboardAwareView.scrollTo({x: 0, y: bottomYOffset, animated: true});
   }
 }

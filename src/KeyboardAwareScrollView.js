@@ -13,6 +13,9 @@ export default class KeyboardAwareScrollView extends KeyboardAwareBase {
         ref={(r) => {
           this._keyboardAwareView = r;
         }}
+        onLayout={(layoutEvent) => {
+          this._onKeyboardAwareViewLayout(layoutEvent.nativeEvent.layout);
+        }}
       />
     );
   }
