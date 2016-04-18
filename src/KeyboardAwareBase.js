@@ -8,7 +8,7 @@ var ScrollViewManager = NativeModules.ScrollViewManager;
 export default class KeyboardAwareBase extends React.Component {
   constructor(props) {
     super(props);
-    this._bind('_onKeyboardWillShow', '_onKeyboardWillHide', '_addKeyboardEventListeners', '_removeKeyboardListeners', '_scrollToFocusedTextInput', '_onKeyboardAwareViewLayout', 'scrollToBottom');
+    this._bind('_onKeyboardWillShow', '_onKeyboardWillHide', '_addKeyboardEventListeners', '_removeKeyboardListeners', '_scrollToFocusedTextInput', '_onKeyboardAwareViewLayout', 'scrollToBottom', 'scrollBottomOnNextSizeChange');
     this.state = {keyboardHeight: 0};
   }
   
@@ -31,13 +31,26 @@ export default class KeyboardAwareBase extends React.Component {
   
   componentWillMount() {
     this._addKeyboardEventListeners();
-
   }
 
   _onKeyboardAwareViewLayout(layout) {
     this._keyboardAwareView.layout = layout;
+    this._keyboardAwareView.contentOffset = {x: 0, y: 0};
+    this._updateKeyboardAwareViewContentSize();
+  }
+
+  _onKeyboardAwareViewScroll(contentOffset) {
+    this._keyboardAwareView.contentOffset = contentOffset;
+    this._updateKeyboardAwareViewContentSize();
+  }
+
+  _updateKeyboardAwareViewContentSize() {
     ScrollViewManager.getContentSize(React.findNodeHandle(this._keyboardAwareView), (res)=> {
       this._keyboardAwareView.contentSize = res;
+      if(this.state.scrollBottomOnNextSizeChange) {
+        this.scrollToBottom();
+        this.state.scrollBottomOnNextSizeChange = false;
+      }
     })
   }
 
@@ -67,16 +80,23 @@ export default class KeyboardAwareBase extends React.Component {
     
     this.setState({keyboardHeight: newKeyboardHeight});
   }
-  
+
   _onKeyboardWillHide(event) {
+    const keyboardHeight = this.state.keyboardHeight;
     this.setState({keyboardHeight: 0});
-    if(this._keyboardAwareView) {
-      this._keyboardAwareView.scrollTo({x: 0, y: 0, animated: true});
-    }
+
+    const yOffset = Math.max(this._keyboardAwareView.contentOffset.y - keyboardHeight, 0);
+    this._keyboardAwareView.scrollTo({x: 0, y: yOffset, animated: true});
+  }
+
+  scrollBottomOnNextSizeChange() {
+    this.state.scrollBottomOnNextSizeChange = true;
   }
 
   scrollToBottom() {
-    const bottomYOffset = this._keyboardAwareView.contentSize.height - this._keyboardAwareView.layout.height + this._keyboardAwareView.props.contentInset.bottom;
-    this._keyboardAwareView.scrollTo({x: 0, y: bottomYOffset, animated: true});
+    if (this._keyboardAwareView) {
+      const bottomYOffset = this._keyboardAwareView.contentSize.height - this._keyboardAwareView.layout.height + this._keyboardAwareView.props.contentInset.bottom;
+      this._keyboardAwareView.scrollTo({x: 0, y: bottomYOffset, animated: true});
+    }
   }
 }
