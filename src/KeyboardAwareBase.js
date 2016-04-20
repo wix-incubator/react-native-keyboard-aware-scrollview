@@ -1,6 +1,7 @@
 import React, {
   DeviceEventEmitter,
-  NativeModules
+  NativeModules,
+  PropTypes
 } from 'react-native';
 
 var ScrollViewManager = NativeModules.ScrollViewManager;
@@ -31,6 +32,13 @@ export default class KeyboardAwareBase extends React.Component {
   
   componentWillMount() {
     this._addKeyboardEventListeners();
+  }
+
+  componentDidMount() {
+    if(this._keyboardAwareView && this.props.startScrolledToBottom) {
+      this.scrollToBottom(false);
+      setTimeout(() => this._keyboardAwareView.setNativeProps({ opacity: 1 }), 100);
+    }
   }
 
   _onKeyboardAwareViewLayout(layout) {
@@ -79,6 +87,10 @@ export default class KeyboardAwareBase extends React.Component {
     }
     
     this.setState({keyboardHeight: newKeyboardHeight});
+
+    if(this.props.scrollToBottomOnKBShow) {
+      this.scrollToBottom();
+    }
   }
 
   _onKeyboardWillHide(event) {
@@ -106,3 +118,12 @@ export default class KeyboardAwareBase extends React.Component {
     }
   }
 }
+
+KeyboardAwareBase.propTypes = {
+  startScrolledToBottom: PropTypes.bool,
+  scrollToBottomOnKBShow: PropTypes.bool
+};
+KeyboardAwareBase.defaultProps = {
+  startScrolledToBottom: false,
+  scrollToBottomOnKBShow: false
+};
