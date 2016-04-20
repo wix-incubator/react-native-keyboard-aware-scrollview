@@ -93,10 +93,16 @@ export default class KeyboardAwareBase extends React.Component {
     this.state.scrollBottomOnNextSizeChange = true;
   }
 
-  scrollToBottom() {
+  scrollToBottom(scrollAnimated = true) {
     if (this._keyboardAwareView) {
+
+      if(!this._keyboardAwareView.contentSize) {
+        setTimeout(() => this.scrollToBottom(scrollAnimated), 50);
+        return;
+      }
+
       const bottomYOffset = this._keyboardAwareView.contentSize.height - this._keyboardAwareView.layout.height + this._keyboardAwareView.props.contentInset.bottom;
-      this._keyboardAwareView.scrollTo({x: 0, y: bottomYOffset, animated: true});
+      this._keyboardAwareView.scrollTo({x: 0, y: bottomYOffset, animated: scrollAnimated});
     }
   }
 }
