@@ -12,7 +12,7 @@ npm i react-native-keyboard-aware-scrollview --save
 Simply import the new component:
 
 ```js
-import KeyboardAwareScrollView from 'react-native-keyboard-aware-scrollview'
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
 ```
 
 Now use it as you would normally do with a `ScrollView` to wrap arround TextInput components:
