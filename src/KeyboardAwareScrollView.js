@@ -1,4 +1,6 @@
-import React, {
+import React from 'react';
+
+import {
   ScrollView,
   PropTypes
 } from 'react-native';

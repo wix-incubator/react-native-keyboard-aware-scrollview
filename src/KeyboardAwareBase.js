@@ -1,4 +1,7 @@
-import React, {
+
+import React , { Component } from 'react';
+
+import ReactNative, {
   DeviceEventEmitter,
   NativeModules,
   PropTypes
@@ -6,7 +9,7 @@ import React, {
 
 var ScrollViewManager = NativeModules.ScrollViewManager;
 
-export default class KeyboardAwareBase extends React.Component {
+export default class KeyboardAwareBase extends Component {
   constructor(props) {
     super(props);
     this._bind('_onKeyboardWillShow', '_onKeyboardWillHide', '_addKeyboardEventListeners', '_removeKeyboardListeners', '_scrollToFocusedTextInput', '_onKeyboardAwareViewLayout', 'scrollToBottom', 'scrollBottomOnNextSizeChange');
@@ -53,7 +56,7 @@ export default class KeyboardAwareBase extends React.Component {
   }
 
   _updateKeyboardAwareViewContentSize() {
-    ScrollViewManager.getContentSize(React.findNodeHandle(this._keyboardAwareView), (res)=> {
+    ScrollViewManager.getContentSize(ReactNative.findNodeHandle(this._keyboardAwareView), (res)=> {
       this._keyboardAwareView.contentSize = res;
       if(this.state.scrollBottomOnNextSizeChange) {
         this.scrollToBottom();
@@ -72,7 +75,7 @@ export default class KeyboardAwareBase extends React.Component {
       textInputRefs.forEach((textInputRef) => {
         if (textInputRef.isFocused()) {
           this._keyboardAwareView.getScrollResponder().scrollResponderScrollNativeHandleToKeyboard(
-            React.findNodeHandle(textInputRef), 50 + (this.props.scrollOffset || 0), true);
+              ReactNative.findNodeHandle(textInputRef), 50 + (this.props.scrollOffset || 0), true);
         }
       });
     }

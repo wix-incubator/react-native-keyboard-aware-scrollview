@@ -1,4 +1,7 @@
-import React, {
+
+import React from 'react';
+
+import {
   ListView
 } from 'react-native';
 
