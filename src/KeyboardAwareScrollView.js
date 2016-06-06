@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 import {
-  ScrollView,
-  PropTypes
+  ScrollView
 } from 'react-native';
 
 import KeyboardAwareBase from './KeyboardAwareBase'
