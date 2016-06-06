@@ -1,10 +1,9 @@
 
-import React , { Component } from 'react';
+import React , { Component, PropTypes } from 'react';
 
 import ReactNative, {
   DeviceEventEmitter,
-  NativeModules,
-  PropTypes
+  NativeModules
 } from 'react-native';
 
 var ScrollViewManager = NativeModules.ScrollViewManager;
