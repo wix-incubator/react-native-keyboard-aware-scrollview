@@ -2,7 +2,7 @@
 import React , { Component, PropTypes } from 'react';
 
 import ReactNative, {
-  DeviceEventEmitter,
+  Keyboard,
   NativeModules
 } from 'react-native';
 
@@ -14,24 +14,24 @@ export default class KeyboardAwareBase extends Component {
     this._bind('_onKeyboardWillShow', '_onKeyboardWillHide', '_addKeyboardEventListeners', '_removeKeyboardListeners', '_scrollToFocusedTextInput', '_onKeyboardAwareViewLayout', 'scrollToBottom', 'scrollBottomOnNextSizeChange');
     this.state = {keyboardHeight: 0};
   }
-  
+
   _bind(...methods) {
     methods.forEach((method) => {
       this[method] = this[method].bind(this);
     });
   }
-  
+
   _addKeyboardEventListeners() {
     this.keyboardEventListeners = [
-      DeviceEventEmitter.addListener('keyboardWillShow', this._onKeyboardWillShow),
-      DeviceEventEmitter.addListener('keyboardWillHide', this._onKeyboardWillHide)
+      Keyboard.addListener('keyboardWillShow', this._onKeyboardWillShow),
+      Keyboard.addListener('keyboardWillHide', this._onKeyboardWillHide)
     ];
   }
-  
+
   _removeKeyboardListeners() {
     this.keyboardEventListeners.forEach((eventListener) => eventListener.remove());
   }
-  
+
   componentWillMount() {
     this._addKeyboardEventListeners();
   }
@@ -69,7 +69,7 @@ export default class KeyboardAwareBase extends Component {
   componentWillUnmount() {
     this._removeKeyboardListeners();
   }
-  
+
   _scrollToFocusedTextInput() {
     if (this.props.getTextInputRefs) {
       const textInputRefs = this.props.getTextInputRefs();
@@ -81,15 +81,15 @@ export default class KeyboardAwareBase extends Component {
       });
     }
   }
-  
+
   _onKeyboardWillShow(event) {
     this._scrollToFocusedTextInput();
-    
+
     const newKeyboardHeight = event.endCoordinates.height;
     if (this.state.keyboardHeight === newKeyboardHeight) {
       return;
     }
-    
+
     this.setState({keyboardHeight: newKeyboardHeight});
 
     if(this.props.scrollToBottomOnKBShow) {
