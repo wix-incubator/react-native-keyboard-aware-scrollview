@@ -2,7 +2,7 @@
 import React , { Component, PropTypes } from 'react';
 
 import ReactNative, {
-  DeviceEventEmitter,
+  Keyboard,
   NativeModules
 } from 'react-native';
 
@@ -23,8 +23,8 @@ export default class KeyboardAwareBase extends Component {
   
   _addKeyboardEventListeners() {
     this.keyboardEventListeners = [
-      DeviceEventEmitter.addListener('keyboardWillShow', this._onKeyboardWillShow),
-      DeviceEventEmitter.addListener('keyboardWillHide', this._onKeyboardWillHide)
+      Keyboard.addListener('keyboardWillShow', this._onKeyboardWillShow),
+      Keyboard.addListener('keyboardWillHide', this._onKeyboardWillHide)
     ];
   }
   
