@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 import {
   ListView
@@ -21,7 +21,10 @@ export default class KeyboardAwareListView extends KeyboardAwareBase {
           this._onKeyboardAwareViewLayout(layoutEvent.nativeEvent.layout);
         }}
         onScroll={(event) => {
-          this._onKeyboardAwareViewScroll(event.nativeEvent.contentOffset)
+          this._onKeyboardAwareViewScroll(event.nativeEvent.contentOffset);
+          if(this.props.onScroll) {
+            this.props.onScroll(event);
+          }
         }}
         onContentSizeChange={() => {
           this._updateKeyboardAwareViewContentSize();
@@ -31,3 +34,7 @@ export default class KeyboardAwareListView extends KeyboardAwareBase {
     );
   }
 }
+
+KeyboardAwareListView.propTypes = {
+  onScroll: PropTypes.func
+};
