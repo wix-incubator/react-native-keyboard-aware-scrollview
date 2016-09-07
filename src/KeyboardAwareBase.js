@@ -4,10 +4,11 @@ import React , { Component, PropTypes } from 'react';
 import ReactNative, {
   DeviceEventEmitter,
   Keyboard,
-  NativeModules
+  NativeModules,
+  InteractionManager
 } from 'react-native';
 
-var ScrollViewManager = NativeModules.ScrollViewManager;
+const ScrollViewManager = NativeModules.ScrollViewManager;
 
 export default class KeyboardAwareBase extends Component {
   constructor(props) {
@@ -78,9 +79,12 @@ export default class KeyboardAwareBase extends Component {
     if (this.props.getTextInputRefs) {
       const textInputRefs = this.props.getTextInputRefs();
       textInputRefs.forEach((textInputRef) => {
-        if (textInputRef.isFocused()) {
-          this._keyboardAwareView.getScrollResponder().scrollResponderScrollNativeHandleToKeyboard(
-              ReactNative.findNodeHandle(textInputRef), 50 + (this.props.scrollOffset || 0), true);
+        if (textInputRef && textInputRef.isFocused()) {
+          InteractionManager.runAfterInteractions(() => {
+              this._keyboardAwareView.getScrollResponder().scrollResponderScrollNativeHandleToKeyboard(
+                ReactNative.findNodeHandle(textInputRef), this.props.scrollToInputAdditionalOffset, true);
+            }
+          );
         }
       });
     }
@@ -129,9 +133,11 @@ export default class KeyboardAwareBase extends Component {
 
 KeyboardAwareBase.propTypes = {
   startScrolledToBottom: PropTypes.bool,
-  scrollToBottomOnKBShow: PropTypes.bool
+  scrollToBottomOnKBShow: PropTypes.bool,
+  scrollToInputAdditionalOffset: PropTypes.number
 };
 KeyboardAwareBase.defaultProps = {
   startScrolledToBottom: false,
-  scrollToBottomOnKBShow: false
+  scrollToBottomOnKBShow: false,
+  scrollToInputAdditionalOffset: 75
 };
