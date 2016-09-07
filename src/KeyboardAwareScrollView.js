@@ -37,6 +37,7 @@ KeyboardAwareScrollView.propTypes = {
   onScroll: PropTypes.func
 };
 KeyboardAwareScrollView.defaultProps = {
+  ...KeyboardAwareBase.defaultProps,
   getTextInputRefs: () => {
     return [];
   }

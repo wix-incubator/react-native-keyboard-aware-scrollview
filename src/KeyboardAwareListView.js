@@ -38,3 +38,7 @@ export default class KeyboardAwareListView extends KeyboardAwareBase {
 KeyboardAwareListView.propTypes = {
   onScroll: PropTypes.func
 };
+
+KeyboardAwareListView.defaultProps = {
+  ...KeyboardAwareBase.defaultProps
+};
