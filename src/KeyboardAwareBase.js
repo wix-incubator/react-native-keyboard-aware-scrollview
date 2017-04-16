@@ -130,6 +130,9 @@ export default class KeyboardAwareBase extends Component {
       this._keyboardAwareView.scrollTo({x: 0, y: bottomYOffset, animated: scrollAnimated});
     }
   }
+  scrollTo(options) {
+    if (this._keyboardAwareView) this._keyboardAwareView.scrollTo(options);
+  }
 }
 
 KeyboardAwareBase.propTypes = {
