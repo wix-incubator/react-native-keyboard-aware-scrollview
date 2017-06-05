@@ -103,6 +103,10 @@ export default class KeyboardAwareBase extends Component {
     if(this.props.scrollToBottomOnKBShow) {
       this.scrollToBottom();
     }
+
+    if (this.props.onKeyboardWillShowCb) {
+      this.props.onKeyboardWillShowCb(newKeyboardHeight);
+    }
   }
 
   _onKeyboardWillHide(event) {
@@ -112,6 +116,10 @@ export default class KeyboardAwareBase extends Component {
     const hasYOffset = this._keyboardAwareView && this._keyboardAwareView.contentOffset && this._keyboardAwareView.contentOffset.y !== undefined;
     const yOffset = hasYOffset ? Math.max(this._keyboardAwareView.contentOffset.y - keyboardHeight, 0) : 0;
     this._keyboardAwareView.scrollTo({x: 0, y: yOffset, animated: true});
+
+    if (this.props.onKeyboardWillHideCb) {
+      this.props.onKeyboardWillHideCb(0);
+    }
   }
 
   scrollBottomOnNextSizeChange() {
@@ -138,7 +146,9 @@ export default class KeyboardAwareBase extends Component {
 KeyboardAwareBase.propTypes = {
   startScrolledToBottom: PropTypes.bool,
   scrollToBottomOnKBShow: PropTypes.bool,
-  scrollToInputAdditionalOffset: PropTypes.number
+  scrollToInputAdditionalOffset: PropTypes.number,
+  onKeyboardWillShowCb: PropTypes.func,
+  onKeyboardWillHideCb: PropTypes.func,
 };
 KeyboardAwareBase.defaultProps = {
   startScrolledToBottom: false,

@@ -61,6 +61,11 @@ class example extends Component {
         </TouchableHighlight>
         <KeyboardAwareListView keyboardDismissMode="interactive"
                                keyboardShouldPersistTaps={true}
+                               onKeyboardWillHideCb={() => {
+                               }}
+                               onKeyboardWillShowCb={(keyboardHeight) => {
+                                 // do something with the cur keyboardHeight
+                               }}
                                dataSource={this.state.dataSource}
                                renderRow={this._renderRow}
                                renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
