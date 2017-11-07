@@ -79,14 +79,16 @@ export default class KeyboardAwareBase extends Component {
   _scrollToFocusedTextInput() {
     if (this.props.getTextInputRefs) {
       const textInputRefs = this.props.getTextInputRefs();
-      textInputRefs.forEach((textInputRef) => {
-        if (textInputRef && textInputRef.isFocused()) {
+      textInputRefs.some((textInputRef, index, array) => {
+        const isFocusedFunc = textInputRef.isFocused();
+        const isFocused = isFocusedFunc && (typeof isFocusedFunc === "function") ? isFocusedFunc() : isFocusedFunc;
+        if (isFocused) {
           setTimeout(() => {
             this._keyboardAwareView.getScrollResponder().scrollResponderScrollNativeHandleToKeyboard(
               ReactNative.findNodeHandle(textInputRef), this.props.scrollToInputAdditionalOffset, true);
           }, 0);
-          return;
         }
+        return isFocused;
       });
     }
   }
