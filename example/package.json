@@ -6,8 +6,9 @@
     "start": "react-native start"
   },
   "dependencies": {
-    "react-native": "0.38.0",
-    "react": "15.4.1",
+    "prop-types": "^15.5.10",
+    "react-native": "0.51.0",
+    "react": "16.0.0",
     "react-native-keyboard-aware-scrollview": "file:../"
   }
 }
