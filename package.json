@@ -1,13 +1,13 @@
 {
-  "name": "react-native-keyboard-aware-scrollview",
+  "name": "react-native-sp-keyboard-aware-scrollview",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wix/react-native-keyboard-aware-scrollview.git"
+    "url": "https://github.com/SudoPlz/react-native-keyboard-aware-scrollview.git"
   },
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "React Native Keyboard Aware ScrollView - auto adjust content ScrollView",
   "nativePackage": true,
   "bugs": {
@@ -18,8 +18,8 @@
   "author": "Artal Druk <artald@wix.com>",
   "license": "MIT",
   "peerDependencies": {
-    "react-native": ">=0.25.1",
-    "react": ">=0.14.5",
+    "react-native": "*",
+    "react": "*",
     "prop-types": "15.6.0"
   }
 }
