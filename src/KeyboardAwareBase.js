@@ -81,7 +81,7 @@ export default class KeyboardAwareBase extends Component {
       const textInputRefs = this.props.getTextInputRefs();
       textInputRefs.some((textInputRef, index, array) => {
         let isFocused = false;
-        if (textInputRef && textInputRef.isFocused != null) {
+        if (textInputRef != null && textInputRef.isFocused != null) {
           const isFocusedFunc = textInputRef.isFocused();
           isFocused = isFocusedFunc && (typeof isFocusedFunc === "function") ? isFocusedFunc() : isFocusedFunc;
           if (isFocused) {
