@@ -10,7 +10,9 @@ import KeyboardAwareBase from './KeyboardAwareBase'
 export default class KeyboardAwareScrollView extends KeyboardAwareBase {
   render() {
     return (
-      <ScrollView {...this.props} {...this.style}
+      <ScrollView
+        {...this.props}
+        {...this.style}
         contentInset={{bottom: this.state.keyboardHeight}}
         ref={(r) => {
           this._keyboardAwareView = r;

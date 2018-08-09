@@ -75,6 +75,20 @@ export default class KeyboardAwareBase extends Component {
   componentWillUnmount() {
     this._removeKeyboardListeners();
   }
+
+  scrollToRef(refToScrollTo) {
+    if (refToScrollTo) {
+      setTimeout(() => {
+        if (this._keyboardAwareView && this._keyboardAwareView.getScrollResponder) {
+          this._keyboardAwareView.getScrollResponder().scrollResponderScrollNativeHandleToKeyboard(
+            ReactNative.findNodeHandle(refToScrollTo),
+            this.props.scrollToInputAdditionalOffset,
+            true,
+          );
+        }
+      }, 0);
+    }
+  }
   
   _scrollToFocusedTextInput() {
     if (this.props.getTextInputRefs) {
