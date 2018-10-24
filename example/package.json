@@ -7,8 +7,8 @@
   },
   "dependencies": {
     "prop-types": "^15.5.10",
-    "react-native": "0.51.0",
-    "react": "16.0.0",
-    "react-native-keyboard-aware-scrollview": "file:../"
+    "react": "^16.6.0-alpha.8af6728",
+    "react-native": "^0.57.3",
+    "react-native-keyboard-aware-scrollview": "latest"
   }
 }

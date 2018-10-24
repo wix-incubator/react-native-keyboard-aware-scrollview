@@ -60,7 +60,7 @@ class example extends Component {
           <Text>Switch to ScrollView</Text>
         </TouchableHighlight>
         <KeyboardAwareListView keyboardDismissMode="interactive"
-                               keyboardShouldPersistTaps={true}
+                               keyboardShouldPersistTaps="always"
                                dataSource={this.state.dataSource}
                                renderRow={this._renderRow}
                                renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
@@ -81,7 +81,7 @@ class example extends Component {
           <Text>Switch to ListView</Text>
         </TouchableHighlight>
         <KeyboardAwareScrollView keyboardDismissMode="interactive"
-                                 keyboardShouldPersistTaps={true}
+                                 keyboardShouldPersistTaps="always"
                                  getTextInputRefs={() => {
                                    return [this._firstNameTI, this._lastNameTI, this._countryTI, this._stateTI, this._addrTI, this._emailTI, this._msgTI, this._notesTI];
                                  }}
