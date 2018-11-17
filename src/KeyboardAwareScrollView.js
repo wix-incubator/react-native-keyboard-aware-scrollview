@@ -12,6 +12,7 @@ export default class KeyboardAwareScrollView extends KeyboardAwareBase {
   render() {
     return (
       <ScrollView {...this.props} {...this.style}
+        scrollEnabled={this.state.scrollEnabled}
         contentInset={{bottom: this.state.keyboardHeight}}
         ref={(r) => {
           this._keyboardAwareView = r;
