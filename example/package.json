@@ -7,8 +7,9 @@
   },
   "dependencies": {
     "prop-types": "^15.5.10",
-    "react": "^16.6.0-alpha.8af6728",
-    "react-native": "^0.57.3",
-    "react-native-keyboard-aware-scrollview": "latest"
+    "react": "16.8.3",
+    "react-native": "0.59.x",
+    "react-native-keyboard-aware-scrollview": "latest",
+    "metro-react-native-babel-preset": "^0.53.1"
   }
 }
