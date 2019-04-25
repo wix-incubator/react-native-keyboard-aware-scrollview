@@ -18,13 +18,13 @@ export default class KeyboardAwareBase extends Component {
     this._bind('_onKeyboardWillShow', '_onKeyboardWillHide', '_addKeyboardEventListeners', '_removeKeyboardListeners', '_scrollToFocusedTextInput', '_onKeyboardAwareViewLayout', 'scrollToBottom', 'scrollBottomOnNextSizeChange');
     this.state = {keyboardHeight: 0};
   }
-  
+
   _bind(...methods) {
     methods.forEach((method) => {
       this[method] = this[method].bind(this);
     });
   }
-  
+
   _addKeyboardEventListeners() {
     const KeyboardEventsObj = Keyboard || DeviceEventEmitter;
     this.keyboardEventListeners = [
@@ -32,11 +32,11 @@ export default class KeyboardAwareBase extends Component {
       KeyboardEventsObj.addListener('keyboardWillHide', this._onKeyboardWillHide)
     ];
   }
-  
+
   _removeKeyboardListeners() {
     this.keyboardEventListeners.forEach((eventListener) => eventListener.remove());
   }
-  
+
   componentWillMount() {
     this._addKeyboardEventListeners();
   }
@@ -76,7 +76,7 @@ export default class KeyboardAwareBase extends Component {
   componentWillUnmount() {
     this._removeKeyboardListeners();
   }
-  
+
   _scrollToFocusedTextInput() {
     if (this.props.getTextInputRefs) {
       const textInputRefs = this.props.getTextInputRefs();
@@ -93,15 +93,15 @@ export default class KeyboardAwareBase extends Component {
       });
     }
   }
-  
+
   _onKeyboardWillShow(event) {
     this._scrollToFocusedTextInput();
-    
+
     const newKeyboardHeight = event.endCoordinates.height;
     if (this.state.keyboardHeight === newKeyboardHeight) {
       return;
     }
-    
+
     this.setState({keyboardHeight: newKeyboardHeight});
 
     if(this.props.scrollToBottomOnKBShow) {
@@ -113,9 +113,10 @@ export default class KeyboardAwareBase extends Component {
     const keyboardHeight = this.state.keyboardHeight;
     this.setState({keyboardHeight: 0});
 
+    const scrollToInputAdditionalOffset = this.props.scrollToInputAdditionalOffset || 0
     const hasYOffset = this._keyboardAwareView && this._keyboardAwareView.contentOffset && this._keyboardAwareView.contentOffset.y !== undefined;
     const yOffset = hasYOffset ? Math.max(this._keyboardAwareView.contentOffset.y - keyboardHeight, 0) : 0;
-    this._keyboardAwareView.scrollTo({x: 0, y: yOffset, animated: true});
+    this._keyboardAwareView.scrollTo({x: 0, y: yOffset + scrollToInputAdditionalOffset, animated: true});
   }
 
   scrollBottomOnNextSizeChange() {
