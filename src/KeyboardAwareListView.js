@@ -14,6 +14,7 @@ export default class KeyboardAwareListView extends KeyboardAwareBase {
     const initialOpacity = this.props.startScrolledToBottom ? 0 : 1;
     return (
       <ListView {...this.props} {...this.style}
+        scrollEnabled={this.state.scrollEnabled}
         opacity={initialOpacity}
         contentInset={{bottom: this.state.keyboardHeight}}
         ref={(r) => {
