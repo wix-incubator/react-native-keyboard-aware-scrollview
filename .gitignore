@@ -145,3 +145,5 @@ xcuserdata
 # Webstorm
 #
 .idea
+
+example/ios/Pods/
