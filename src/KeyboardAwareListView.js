@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 
 import {
-  ListView
+  ScrollView
 } from 'react-native';
 
 import KeyboardAwareBase from './KeyboardAwareBase'
@@ -13,7 +13,7 @@ export default class KeyboardAwareListView extends KeyboardAwareBase {
   render() {
     const initialOpacity = this.props.startScrolledToBottom ? 0 : 1;
     return (
-      <ListView {...this.props} {...this.style}
+      <ScrollView {...this.props} {...this.style}
         opacity={initialOpacity}
         contentInset={{bottom: this.state.keyboardHeight}}
         ref={(r) => {

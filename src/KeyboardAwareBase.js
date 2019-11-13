@@ -7,7 +7,6 @@ import ReactNative, {
   DeviceEventEmitter,
   Keyboard,
   NativeModules,
-  InteractionManager
 } from 'react-native';
 
 const ScrollViewManager = NativeModules.ScrollViewManager;
@@ -17,6 +16,7 @@ export default class KeyboardAwareBase extends Component {
     super(props);
     this._bind('_onKeyboardWillShow', '_onKeyboardWillHide', '_addKeyboardEventListeners', '_removeKeyboardListeners', '_scrollToFocusedTextInput', '_onKeyboardAwareViewLayout', 'scrollToBottom', 'scrollBottomOnNextSizeChange');
     this.state = {keyboardHeight: 0};
+    this._addKeyboardEventListeners();
   }
   
   _bind(...methods) {
@@ -35,10 +35,6 @@ export default class KeyboardAwareBase extends Component {
   
   _removeKeyboardListeners() {
     this.keyboardEventListeners.forEach((eventListener) => eventListener.remove());
-  }
-  
-  componentWillMount() {
-    this._addKeyboardEventListeners();
   }
 
   componentDidMount() {

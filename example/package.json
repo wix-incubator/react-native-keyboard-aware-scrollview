@@ -1,15 +1,15 @@
 {
   "name": "example",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "start": "react-native start"
   },
   "dependencies": {
+    "metro-react-native-babel-preset": "^0.53.1",
     "prop-types": "^15.5.10",
-    "react": "16.8.3",
-    "react-native": "0.59.x",
-    "react-native-keyboard-aware-scrollview": "latest",
-    "metro-react-native-babel-preset": "^0.53.1"
+    "react": "16.9.0",
+    "react-native": "0.61.4",
+    "react-native-keyboard-aware-scrollview": "latest"
   }
 }
