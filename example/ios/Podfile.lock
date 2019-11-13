@@ -217,8 +217,6 @@ PODS:
     - React-cxxreact (= 0.61.4)
     - React-jsi (= 0.61.4)
     - ReactCommon/jscallinvoker (= 0.61.4)
-  - ReactNativeKeyboardAwareScrollview (2.0.0):
-    - React
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -249,7 +247,6 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/jscallinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
-  - ReactNativeKeyboardAwareScrollview (from `../../ReactNativeKeyboardAwareScrollview.podspec`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -305,8 +302,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
-  ReactNativeKeyboardAwareScrollview:
-    :path: "../../ReactNativeKeyboardAwareScrollview.podspec"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -336,9 +331,8 @@ SPEC CHECKSUMS:
   React-RCTText: 21934e0a51d522abcd0a275407e80af45d6fd9ec
   React-RCTVibration: 0f76400ee3cec6edb9c125da49fed279340d145a
   ReactCommon: a6a294e7028ed67b926d29551aa9394fd989c24c
-  ReactNativeKeyboardAwareScrollview: 8d6550d79380b729fddebd60be02651bf7aae27a
   Yoga: ba3d99dbee6c15ea6bbe3783d1f0cb1ffb79af0f
 
-PODFILE CHECKSUM: dce0f2029903abb03731220ded209a6c01c62025
+PODFILE CHECKSUM: 21b569d2e484caedcba954e8085fd281d677c004
 
 COCOAPODS: 1.8.4
