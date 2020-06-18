@@ -18,13 +18,13 @@ export default class KeyboardAwareBase extends Component {
     this.state = {keyboardHeight: 0};
     this._addKeyboardEventListeners();
   }
-  
+
   _bind(...methods) {
     methods.forEach((method) => {
       this[method] = this[method].bind(this);
     });
   }
-  
+
   _addKeyboardEventListeners() {
     const KeyboardEventsObj = Keyboard || DeviceEventEmitter;
     this.keyboardEventListeners = [
@@ -32,7 +32,7 @@ export default class KeyboardAwareBase extends Component {
       KeyboardEventsObj.addListener('keyboardWillHide', this._onKeyboardWillHide)
     ];
   }
-  
+
   _removeKeyboardListeners() {
     this.keyboardEventListeners.forEach((eventListener) => eventListener.remove());
   }
@@ -72,32 +72,32 @@ export default class KeyboardAwareBase extends Component {
   componentWillUnmount() {
     this._removeKeyboardListeners();
   }
-  
+
   _scrollToFocusedTextInput() {
     if (this.props.getTextInputRefs) {
       const textInputRefs = this.props.getTextInputRefs();
       textInputRefs.some((textInputRef, index, array) => {
-        const isFocusedFunc = textInputRef.isFocused();
+        const isFocusedFunc = textInputRef.current?.isFocused();
         const isFocused = isFocusedFunc && (typeof isFocusedFunc === "function") ? isFocusedFunc() : isFocusedFunc;
         if (isFocused) {
           setTimeout(() => {
             this._keyboardAwareView.getScrollResponder().scrollResponderScrollNativeHandleToKeyboard(
-              ReactNative.findNodeHandle(textInputRef), this.props.scrollToInputAdditionalOffset, true);
+              ReactNative.findNodeHandle(textInputRef.current), this.props.scrollToInputAdditionalOffset, true);
           }, 0);
         }
         return isFocused;
       });
     }
   }
-  
+
   _onKeyboardWillShow(event) {
     this._scrollToFocusedTextInput();
-    
+
     const newKeyboardHeight = event.endCoordinates.height;
     if (this.state.keyboardHeight === newKeyboardHeight) {
       return;
     }
-    
+
     this.setState({keyboardHeight: newKeyboardHeight});
 
     if(this.props.scrollToBottomOnKBShow) {
