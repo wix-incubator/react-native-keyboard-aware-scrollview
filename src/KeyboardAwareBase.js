@@ -46,7 +46,9 @@ export default class KeyboardAwareBase extends Component {
 
   _onKeyboardAwareViewLayout(layout) {
     this._keyboardAwareView.layout = layout;
-    this._keyboardAwareView.contentOffset = {x: 0, y: 0};
+    if(!this._keyboardAwareView.contentOffset){
+      this._keyboardAwareView.contentOffset = {x: 0, y: 0};
+    }
     this._updateKeyboardAwareViewContentSize();
   }
 
