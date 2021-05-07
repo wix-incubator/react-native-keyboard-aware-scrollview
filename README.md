@@ -1,13 +1,19 @@
 # react-native-keyboard-aware-scrollview
 A helper component meant to be used as a drop-in replacement for RN ScrollView which handles the ScrollView insets properly when the keyboard is shown or hides so all the content is scrollable and available to the user.
 
+# About this folk
+Fix auto scroll to top.
+Remove timeout when component unmount
 ## Installation
 
 Install using `npm`:
 ```
-npm i react-native-keyboard-aware-scrollview --save
+npm i https://github.com/vokhuyetOz/react-native-keyboard-aware-scrollview.git --save
 ```
-
+Install using `yarn`:
+```
+yarn add https://github.com/vokhuyetOz/react-native-keyboard-aware-scrollview.git
+```
 ## How To Use
 Simply import the new component:
 
