@@ -9,7 +9,7 @@
     "metro-react-native-babel-preset": "^0.53.1",
     "prop-types": "^15.5.10",
     "react": "16.9.0",
-    "react-native": "0.61.4",
+    "react-native": "0.62.3",
     "react-native-keyboard-aware-scrollview": "latest"
   }
 }
