@@ -111,7 +111,10 @@ export default class KeyboardAwareBase extends Component {
 
     const hasYOffset = this._keyboardAwareView && this._keyboardAwareView.contentOffset && this._keyboardAwareView.contentOffset.y !== undefined;
     const yOffset = hasYOffset ? Math.max(this._keyboardAwareView.contentOffset.y - keyboardHeight, 0) : 0;
-    this._keyboardAwareView.scrollTo({x: 0, y: yOffset, animated: true});
+
+    if ((yOffset - keyboardHeight) > 0 && keyboardHeight > 0) {
+      this.scrollToBottom();
+    }
   }
 
   scrollBottomOnNextSizeChange() {
