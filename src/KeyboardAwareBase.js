@@ -76,8 +76,8 @@ export default class KeyboardAwareBase extends Component {
   _scrollToFocusedTextInput() {
     if (this.props.getTextInputRefs) {
       const textInputRefs = this.props.getTextInputRefs();
-      textInputRefs.some((textInputRef, index, array) => {
-        const isFocusedFunc = textInputRef.isFocused();
+      textInputRefs.some((textInputRef) => {
+        const isFocusedFunc = textInputRef && (typeof textInputRef.isFocused === "function") && textInputRef.isFocused();
         const isFocused = isFocusedFunc && (typeof isFocusedFunc === "function") ? isFocusedFunc() : isFocusedFunc;
         if (isFocused) {
           setTimeout(() => {
